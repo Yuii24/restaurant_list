@@ -1,5 +1,5 @@
 const express = require("express");
-const engine = require("express-handlebars")
+const { engine } = require("express-handlebars");
 const app = express();
 const port = 3000;
 
@@ -16,7 +16,7 @@ app.get("/", (req, res) => {
 })
 
 app.get("/restaurants", (req, res) => {
-  res.send("restaurants_list")
+  res.render("index")
 })
 
 app.get("/restaurants/:id", (req, res) => {
