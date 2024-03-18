@@ -17,7 +17,17 @@ app.get("/", (req, res) => {
 })
 
 app.get("/restaurants", (req, res) => {
-  res.render("index", { restaurants: restaurants })
+  const keyword = req.query.search?.trim();
+  console.log("keyword", keyword);
+  const matchRest = keyword ? restaurants.filter((mv) =>
+    Object.values(mv).some((property) => {
+      if (typeof property === "string") {
+        return property.toLowerCase().includes(keyword.toLowerCase())
+      }
+      return false
+    })
+  ) : restaurants
+  res.render("index", { restaurants: matchRest, keyword })
 })
 
 app.get("/restaurants/:id", (req, res) => {
