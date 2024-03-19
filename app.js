@@ -33,7 +33,7 @@ app.get("/restaurants", (req, res) => {
 app.get("/restaurants/:id", (req, res) => {
   const id = req.params.id
   const restaurant = restaurants.find((mv) => mv.id.toString() === id)
-  res.render("detail", { restaurant })
+  res.render("show", { restaurant })
 })
 
 app.listen(port, () => {
