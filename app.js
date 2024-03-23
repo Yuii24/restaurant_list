@@ -20,13 +20,9 @@ app.get("/restaurants", (req, res) => {
   const keyword = req.query.keyword?.trim();
   console.log("keyword", keyword);
   const matchRest = keyword ? restaurants.filter((mv) =>
-    Object.values(mv).some((property) => {
-      if (typeof property === "string") {
-        return property.toLowerCase().includes(keyword.toLowerCase())
-      }
-      return false
-    })
-  ) : restaurants
+    mv.name.toLowerCase().includes(keyword.toLowerCase()) ||
+    mv.category.toLowerCase().includes(keyword.toLowerCase())
+  ) : restaurants;
   res.render("index", { restaurants: matchRest, keyword })
 })
 
